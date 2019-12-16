@@ -1,3 +1,4 @@
+#include <cmath>
 #include "SiteResultsWidget.h"
 #include <QLineSeries>
 #include <QChartView>
@@ -90,8 +91,8 @@ void SiteResultsWidget::setResult(int id, SiteResult *result)
     for (int i = 0; i < periods.size(); i++)
     {
         m_meanSeries << QPointF(periods[i], saMeans[i]);
-        m_upperSeries << QPointF(periods[i], exp(log(saMeans[i]) - stdDevs[i]));
-        m_lowerSeries << QPointF(periods[i], exp(log(saMeans[i])  + stdDevs[i]));
+        m_upperSeries << QPointF(periods[i], std::exp(std::log(saMeans[i]) - stdDevs[i]));
+        m_lowerSeries << QPointF(periods[i], std::exp(std::log(saMeans[i])  + stdDevs[i]));
         m_simulationSeries << QPointF(periods[i], simulation[i]);
     }
     if(NULL != m_recordsDb)
